@@ -6,7 +6,6 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.PhantomJS;
-using System;
 
 namespace UnitTestProject1
 {
@@ -16,7 +15,6 @@ namespace UnitTestProject1
         // Dominio base a utilizar
         private string baseURL = "https://www.google.es/";
         private RemoteWebDriver driver;
-        private string browser;
         public TestContext TestContext { get; set; }
 
         [TestMethod]
@@ -25,8 +23,12 @@ namespace UnitTestProject1
         [Owner("Chrome")]
         public void TestMethod1()
         {
+            ChromeOptions chromeOptions = new ChromeOptions();
+            chromeOptions.AddArguments("--verbose");
+            chromeOptions.AddArguments("--whitelisted-ips=''");
+
             // 1. Crear nueva instancia de chrome
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(chromeOptions);
 
             // 2. Maximizar la ventana
             driver.Manage().Window.Maximize();
